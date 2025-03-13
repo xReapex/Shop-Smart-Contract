@@ -1,20 +1,43 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.9;
 
-import "./Manager.sol";
+contract ShopManager {
+    address public owner;
+    mapping(address => bool) public managers;
 
-contract ShopManager is Manager {
+    event ManagerAdded(address indexed manager);
+    event ManagerRemoved(address indexed manager);
 
-    event ProductAdded(uint id, string name, uint price, uint quantity);
-
-    struct Product {
-        uint id;
-        string name;
-        uint price;
-        uint quantity;
+    // Constructeur pour définir le propriétaire initial
+    constructor() {
+        owner = msg.sender;
     }
 
-    mapping(uint => Product) public products; 
+    // Modificateur pour restreindre l'accès au propriétaire
+    modifier onlyOwner() {
+        require(msg.sender == owner, "Only owner can call this function");
+        _;
+    }
 
+    // Modificateur pour restreindre l'accès aux managers
+    modifier onlyManager() {
+        require(managers[msg.sender], "Only manager can call this function");
+        _;
+    }
 
+    function addManager(address _manager) public onlyOwner {
+        require(!managers[_manager], "Already a manager");
+        managers[_manager] = true;
+        emit ManagerAdded(_manager);
+    }
+
+    function removeManager(address _manager) public onlyOwner {
+        require(managers[_manager], "Not a manager");
+        delete managers[_manager];
+        emit ManagerRemoved(_manager);
+    }
+
+    function isManager(address _manager) public view returns (bool) {
+        return managers[_manager];
+    }
 }

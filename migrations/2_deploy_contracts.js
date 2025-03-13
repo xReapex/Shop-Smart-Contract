@@ -1,7 +1,7 @@
 const ShopManager = artifacts.require('./ShopManager');
-const Manager = artifacts.require('./Manager');
+const Shop = artifacts.require('./Shop');
 
 module.exports = function (deployer) {
-  deployer.deploy(Manager);
   deployer.deploy(ShopManager);
+  deployer.deploy(Shop);
 };
