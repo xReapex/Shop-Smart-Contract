@@ -28,7 +28,7 @@ jobs:
         run: npm install -g truffle ganache
 
       - name: Lancer Ganache
-        run: ganache
+        run: npx ganache-cli -p 8545 -d &
 
       - name: 🏗️ Compiler les smart contracts
         run: truffle compile
