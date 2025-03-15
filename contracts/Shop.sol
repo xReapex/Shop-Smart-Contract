@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.9;
 
-import "./ShopManager.sol";
+import "./ManagerFactory.sol";
 
-contract Shop is ShopManager {
+contract Shop is ManagerFactory {
 
     event ProductAdded(uint id, string name, uint price, uint quantity);
 

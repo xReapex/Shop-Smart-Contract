@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.9;
 
-contract ShopManager {
+contract ManagerFactory {
     address public owner;
     mapping(address => bool) public managers;
 
